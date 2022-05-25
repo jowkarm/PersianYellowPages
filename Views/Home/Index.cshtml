@@ -1,0 +1,30 @@
+﻿<!--
+     (Teamwork)
+-->
+
+@model List<Business>
+@{
+    ViewBag.Title = "Persian Yellow Pages";
+}
+
+<h2>Business List</h2>
+
+@foreach (var business in Model)
+            {
+<div class="card w-75 p-3 m-3">
+    <div class="card-body">
+        <h5 class="card-title">@business.TitleEnglish</h5>
+        <p class="card-text">@business.DescriptionEnglish</p>
+        <br />
+        <h4 class="card-title text-right persian">@business.TitlePersian</h4>
+        <p class="card-text text-right persian">@business.DescriptionPersian</p>
+        <p>Phone: @business.Phone1</p>
+        <a href="@business.Website" class="btn btn-primary">Website</a>
+        <a href="@business.Email" class="btn btn-primary">Email</a>
+    </div>
+</div>
+
+              
+            }
+   
+     

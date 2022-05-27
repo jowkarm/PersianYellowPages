@@ -44,6 +44,13 @@
         </nav>
     </header>
     <div class="container">
+        @if (User.Identity.Name == "jokar.mehdi2@gmail.com") { <div class="alert alert-warning" role="alert">
+                                                                   <a class="link-warning" href="Admin/Home/Index">Go to the Admin dashboard.</a>
+</div>}
+        
+        <div class="alert alert-primary" role="alert">
+            <a  class="link-primary" href="BusinessOwner/Home/Create">Register your business now!</a>
+        </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

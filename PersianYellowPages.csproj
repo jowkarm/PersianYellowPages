@@ -24,6 +24,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\BusinessOwner\Data\" />
     <Folder Include="Areas\BusinessOwner\Models\" />
+    <Folder Include="Areas\BusinessOwner\Views\Shared\" />
   </ItemGroup>
 
 </Project>

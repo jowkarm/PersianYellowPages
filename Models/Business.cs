@@ -38,7 +38,9 @@ namespace PersianYellowPages.Models
         [Required(ErrorMessage = "Please enter available sqft")]
         public int AddressID { get; set; }
 
-
+        //public  Address Address { get; set; }
+        public  Category Categories { get; set; }
+        //public  UserProfile User { get; set; }
 
 
         public string Slug

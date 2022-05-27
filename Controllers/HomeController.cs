@@ -21,7 +21,7 @@ namespace PersianYellowPages.Controllers
 
         public IActionResult Index()
         {
-            List<Business> businessList = BusinessDB.BusinessList();
+            List<BusinessDetailsViewModel> businessList = BusinessDB.BusinessList();
             return View(businessList);
         }
 

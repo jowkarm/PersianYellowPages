@@ -2,7 +2,7 @@
      (Teamwork)new
 -->
 
-@model List<Business>
+@model List<BusinessDetailsViewModel>
 @{
     ViewBag.Title = "Persian Yellow Pages";
 }
@@ -19,6 +19,8 @@
         <h4 class="card-title text-right persian">@business.TitlePersian</h4>
         <p class="card-text text-right persian">@business.DescriptionPersian</p>
         <p>Phone: @business.Phone1</p>
+        <p>Category: @business.CategoryName</p>
+        <p>Address: @business.AddressLine1 @business.AddressLine2 @business.CityName, @business.StateName, @business.ZipCode</p>
         <a href="@business.Website" class="btn btn-primary">Website</a>
         <a href="@business.Email" class="btn btn-primary">Email</a>
     </div>

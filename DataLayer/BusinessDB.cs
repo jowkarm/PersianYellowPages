@@ -31,12 +31,14 @@ namespace PersianYellowPages.DataLayer
 
 
         //The BusinessList() method is created
-        public static List<Business> BusinessList()
+        public static List<BusinessDetailsViewModel> BusinessList()
         {
             string ConnectionString = StaticMethod();
-            List<Business> businesses = new List<Business>();
-            string selectStatement = "SELECT * " +
-                                     "FROM Business";
+            List<BusinessDetailsViewModel> businesses = new List<BusinessDetailsViewModel>();
+            string selectStatement = " SELECT * " +
+                                     " FROM Business " +
+                                     " INNER JOIN Category " +
+                                     " ON Business.CategoryId = Category.CategoryId ";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand(selectStatement, connection))
@@ -45,9 +47,9 @@ namespace PersianYellowPages.DataLayer
                     using SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        businesses.Add(new Business
+                        businesses.Add(new BusinessDetailsViewModel
                         {
-                            BusinessID = (int)reader["BusinessID"],
+                            
                             TitleEnglish = reader["TitleEnglish"].ToString(),
                             TitlePersian = reader["TitlePersian"].ToString(),
                             DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
@@ -56,8 +58,8 @@ namespace PersianYellowPages.DataLayer
                             Phone2 = reader["Phone2"].ToString(),
                             Website = reader["Website"].ToString(),
                             Email = reader["Email"].ToString(),
-                            CategoryID = (int)reader["CategoryID"],
-                            AddressID = (int)reader["AddressID"]
+                            CategoryName = reader["CategoryName"].ToString()
+
 
                         });
                     }

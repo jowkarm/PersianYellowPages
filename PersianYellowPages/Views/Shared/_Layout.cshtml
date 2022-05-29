@@ -1,0 +1,93 @@
+﻿@inject LanguageService language
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @language.Getkey("Persian YellowPages")</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @if (System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+    {
+<link rel="stylesheet" href="~/css/rtl.css" />}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("Persian YellowPages")</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@language.Getkey("Privacy")</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="nav-wrapper">
+                    <div class="sl-nav">
+
+
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <ul class="navbar-nav flex-grow-1">
+                                @{ if (User.Identity.IsAuthenticated == false)
+                                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signin" asp-area="MicrosoftIdentity">@language.Getkey("Signin")</a>
+                        </li> }
+                                    else
+                                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity">@language.Getkey("Signout")</a>
+                        </li> } }
+
+                                <li class="nav-item"><a href="BusinessOwner/" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> <strong>@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value</strong> @language.Getkey("Hello!")</a></li>
+                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> English</a></li>
+
+                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="fa" class="nav-link text-dark"><i class="flag-icon flag-icon-de"></i> فارسی</a></li>
+
+                            </ul>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        @if (User.Identity.Name == "jokar.mehdi2@gmail.com")
+        {<div class="alert alert-warning" role="alert">
+                <a class="link-warning" href="Admin/Home/Index">@language.Getkey("Go to the Admin dashboard.")</a>
+            </div>}
+
+        <div class="alert alert-primary" role="alert">
+            <a class="link-primary" href="BusinessOwner/Home/Create">@language.Getkey("Register your business now!")</a>
+        </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - @language.Getkey("Persian YellowPages") - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

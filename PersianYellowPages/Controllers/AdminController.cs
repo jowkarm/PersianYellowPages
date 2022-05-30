@@ -1,36 +1,38 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PersianYellowPages.DataLayer;
+using PersianYellowPages.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PersianYellowPages.Areas.BusinessOwner.Controllers
+namespace PersianYellowPages.Controllers
 {
-    [Area("BusinessOwner")]
-    [Authorize]
-    public class HomeController : Controller
+    [Authorize(Roles = "Admin")]
+    public class AdminController : Controller
     {
-        // GET: HomeController
+        // GET: AdminController
         public ActionResult Index()
         {
-            return View();
+            List<BusinessDetailsViewModel> businessList = BusinessDB.AdminBusinessList();
+            return View(businessList);
         }
 
-        // GET: HomeController/Details/5
+        // GET: AdminController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: HomeController/Create
+        // GET: AdminController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HomeController/Create
+        // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -45,13 +47,13 @@ namespace PersianYellowPages.Areas.BusinessOwner.Controllers
             }
         }
 
-        // GET: HomeController/Edit/5
+        // GET: AdminController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: HomeController/Edit/5
+        // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -66,13 +68,13 @@ namespace PersianYellowPages.Areas.BusinessOwner.Controllers
             }
         }
 
-        // GET: HomeController/Delete/5
+        // GET: AdminController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HomeController/Delete/5
+        // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

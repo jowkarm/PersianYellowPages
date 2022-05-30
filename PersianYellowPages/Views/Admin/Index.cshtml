@@ -1,0 +1,24 @@
+﻿@model List<BusinessDetailsViewModel>
+@{ ViewBag.Title = "Persian Yellow Pages"; }
+
+<h2>List of All Businesses - Verified and Unverified</h2>
+
+@foreach (var business in Model)
+{
+<div class="card w-75 p-3 m-3">
+    <div class="card-body">
+        <h5 class="card-title">@business.TitleEnglish</h5>
+        <p class="card-text">@business.DescriptionEnglish</p>
+        <br />
+        <h4 class="card-title text-right persian">@business.TitlePersian</h4>
+        <p class="card-text text-right persian">@business.DescriptionPersian</p>
+        <p>Category: @business.CategoryName</p>
+        <p> @business.City, @business.State</p>
+       @{ @if (business.Verified == true)
+       {<a href="" class="btn btn-success">Verified</a>}
+           else { <a href="" class="btn btn-danger">Unverified</a>
+           }
+       }
+        <a href="" class="btn btn-primary">Edit</a>
+    </div>
+</div>            }

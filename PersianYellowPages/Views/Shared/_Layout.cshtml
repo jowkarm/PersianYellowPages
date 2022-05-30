@@ -40,22 +40,27 @@
                             <ul class="navbar-nav flex-grow-1">
                                 @{ if (User.Identity.IsAuthenticated == false)
                                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signin" asp-area="MicrosoftIdentity">@language.Getkey("Signin")</a>
-                        </li> }
-                                    else
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Signin" asp-area="MicrosoftIdentity">@language.Getkey("Signin")</a>
+
+                            </li>
+
+ }
+                                        else
+                                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity">@language.Getkey("Signout")</a>
+                            </li> } }
+                                @if (User.Identity.IsAuthenticated == true)
                                     {
+                            <li class="nav-item"> <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity"><strong>@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value</strong> @language.Getkey("Hello!")</a></li>
+                            }
+                                            <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> English</a></li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity">@language.Getkey("Signout")</a>
-                        </li> } }
+                                                            <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="fa" class="nav-link text-dark"><i class="flag-icon flag-icon-de"></i> فارسی</a></li>
 
-                                <li class="nav-item"><a href="BusinessOwner/" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> <strong>@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value</strong> @language.Getkey("Hello!")</a></li>
-                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> English</a></li>
-
-                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="fa" class="nav-link text-dark"><i class="flag-icon flag-icon-de"></i> فارسی</a></li>
-
-                            </ul>
+                               </ul>
 
 
 
@@ -69,11 +74,11 @@
     <div class="container">
         @if (User.Identity.Name == "jokar.mehdi2@gmail.com")
         {<div class="alert alert-warning" role="alert">
-                <a class="link-warning" href="Admin/Home/Index">@language.Getkey("Go to the Admin dashboard.")</a>
+                <a class="link-warning" asp-area="" asp-controller="Admin" asp-action="Index">@language.Getkey("Go to the Admin dashboard.")</a>
             </div>}
 
         <div class="alert alert-primary" role="alert">
-            <a class="link-primary" href="BusinessOwner/Home/Create">@language.Getkey("Register your business now!")</a>
+            <a class="link-primary" asp-area="" asp-controller="BusinessOwner" asp-action="Index" >@language.Getkey("Register your business now!")</a>
         </div>
         <main role="main" class="pb-3">
             @RenderBody()

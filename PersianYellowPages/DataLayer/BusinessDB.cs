@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Documents;
+using Microsoft.Extensions.Configuration;
 using PersianYellowPages.Models;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,7 @@ namespace PersianYellowPages.DataLayer
     public class BusinessDB
     {
         string ConStr = "";
-
-        //The Constructor that gets the connection string
+       
         public BusinessDB()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
@@ -38,7 +39,10 @@ namespace PersianYellowPages.DataLayer
             string selectStatement = " SELECT * " +
                                      " FROM Business " +
                                      " INNER JOIN Category " +
-                                     " ON Business.CategoryId = Category.CategoryId ";
+                                     " ON Business.CategoryId = Category.CategoryId " +
+                                     " INNER JOIN Address " +
+                                     " ON Business.AddressId = Address.AddressId " +
+                                     " WHERE Business.Verified = 'True' ";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand(selectStatement, connection))
@@ -54,11 +58,99 @@ namespace PersianYellowPages.DataLayer
                             TitlePersian = reader["TitlePersian"].ToString(),
                             DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
                             DescriptionPersian = reader["DescriptionPersian"].ToString(),
-                            Phone1 = reader["Phone1"].ToString(),
-                            Phone2 = reader["Phone2"].ToString(),
-                            Website = reader["Website"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            CategoryName = reader["CategoryName"].ToString()
+                            CategoryName = reader["CategoryName"].ToString(),
+                            City = reader["City"].ToString(),
+                            State = reader["State"].ToString(),
+                            Verified = (bool)reader["Verified"]
+
+
+                        });
+                    }
+                    connection.Close();
+                }
+            }
+
+            return businesses;
+        }
+
+
+        //The AdminBusinessList() method is created
+        public static List<BusinessDetailsViewModel> AdminBusinessList()
+        {
+            string ConnectionString = StaticMethod();
+            List<BusinessDetailsViewModel> businesses = new List<BusinessDetailsViewModel>();
+            string selectStatement = " SELECT * " +
+                                     " FROM Business " +
+                                     " INNER JOIN Category " +
+                                     " ON Business.CategoryId = Category.CategoryId " +
+                                     " INNER JOIN Address " +
+                                     " ON Business.AddressId = Address.AddressId " +
+                                     " ORDER BY Business.Verified DESC ";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        businesses.Add(new BusinessDetailsViewModel
+                        {
+
+                            TitleEnglish = reader["TitleEnglish"].ToString(),
+                            TitlePersian = reader["TitlePersian"].ToString(),
+                            DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
+                            DescriptionPersian = reader["DescriptionPersian"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            City = reader["City"].ToString(),
+                            State = reader["State"].ToString(),
+                            Verified = (bool) reader["Verified"]
+
+
+                        });
+                    }
+                    connection.Close();
+                }
+            }
+
+            return businesses;
+        }
+
+        //The OwnerBusinessList() method is created
+        public static List<BusinessDetailsViewModel> OwnerBusinessList(string userEmail)
+        {
+            string ConnectionString = StaticMethod();
+            List<BusinessDetailsViewModel> businesses = new List<BusinessDetailsViewModel>();
+            string selectStatement = " SELECT * " +
+                                     " FROM Business " +
+                                     " INNER JOIN Category " +
+                                     " ON Business.CategoryId = Category.CategoryId " +
+                                     " INNER JOIN Address " +
+                                     " ON Business.AddressId = Address.AddressId " +
+                                     " INNER JOIN UserProfile " +
+                                     " ON Business.UserId = UserProfile.UserId " +
+                                     " WHERE UserProfile.UserEmail = @UserEmail " +
+                                     " ORDER BY Business.Verified DESC ";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@UserEmail", userEmail);
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        businesses.Add(new BusinessDetailsViewModel
+                        {
+
+                            TitleEnglish = reader["TitleEnglish"].ToString(),
+                            TitlePersian = reader["TitlePersian"].ToString(),
+                            DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
+                            DescriptionPersian = reader["DescriptionPersian"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            City = reader["City"].ToString(),
+                            State = reader["State"].ToString(),
+                            Verified = (bool)reader["Verified"]
 
 
                         });

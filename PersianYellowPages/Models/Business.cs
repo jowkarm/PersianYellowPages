@@ -43,15 +43,6 @@ namespace PersianYellowPages.Models
         //public  UserProfile User { get; set; }
 
 
-        public string Slug
-        {
-            get
-            {
-                if (Phone2 == null)
-                    return "";
-                else
-                    return Phone2.Replace(' ', '-');
-            }
-        }
+      
     }
 }

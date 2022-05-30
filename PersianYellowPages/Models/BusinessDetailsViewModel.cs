@@ -20,9 +20,8 @@ namespace PersianYellowPages.Models
         public string AddressLine2 { get; set; }
         public string GoogleMapLink { get; set; }
         public string ZipCode { get; set; }
-        public string CityName { get; set; }
-        public string StateAbbreviation { get; set; }
-        public string StateName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
         public string CategoryName { get; set; }
         public decimal RateAverage { get; set; }
         public string PageTitle { get; set; }

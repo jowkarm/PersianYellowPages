@@ -38,6 +38,8 @@ namespace PersianYellowPages
             var myConnString = _configuration.GetConnectionString("DBConnection");
             services.AddMvc();
 
+            services.AddHttpContextAccessor();
+
             //
             services.AddRazorPages()
                  .AddMicrosoftIdentityUI();

@@ -3,14 +3,13 @@
 -->
 
 @model List<BusinessDetailsViewModel>
-@{
-    ViewBag.Title = "Persian Yellow Pages";
-}
+@{ ViewBag.Title = "Persian Yellow Pages"; }
 
+<!--This page is done.-->
 <h2>Business List</h2>
 
 @foreach (var business in Model)
-            {
+{
 <div class="card w-100 p-3 m-3">
     <div class="card-body">
         <h5 class="card-title">@business.TitleEnglish</h5>
@@ -21,13 +20,9 @@
         <br />
         <p> <strong>@business.CategoryName</strong></p>
         <p><strong>@business.City, @business.State</strong></p>
-       
-        <a asp-controller="Home" asp-action="Details"
-                       asp-route-id="@business.BusinessId" class="btn btn-primary">Details</a>
-    </div>
-</div>
 
-              
-            }
-   
-     
+        <a asp-controller="Home" asp-action="Details"
+           asp-route-id="@business.BusinessId" class="btn btn-primary">Details</a>
+    </div>
+</div>            }
+

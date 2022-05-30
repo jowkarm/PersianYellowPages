@@ -28,6 +28,14 @@ namespace PersianYellowPages.Controllers
             return View(businessList);
         }
 
+
+        public ActionResult Details(int id)
+        {
+            BusinessDetailsViewModel businessDetails = BusinessDB.GetBusiness(id);
+            return View(businessDetails);
+        }
+
+
         public IActionResult ChangeLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,

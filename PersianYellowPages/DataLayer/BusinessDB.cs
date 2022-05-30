@@ -53,7 +53,7 @@ namespace PersianYellowPages.DataLayer
                     {
                         businesses.Add(new BusinessDetailsViewModel
                         {
-                            
+                            BusinessId = (int)reader["BusinessId"],
                             TitleEnglish = reader["TitleEnglish"].ToString(),
                             TitlePersian = reader["TitlePersian"].ToString(),
                             DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
@@ -71,6 +71,59 @@ namespace PersianYellowPages.DataLayer
             }
 
             return businesses;
+        }
+
+
+        //The BusinessList() method is created
+        public static BusinessDetailsViewModel GetBusiness(int businessId)
+        {
+            string ConnectionString = StaticMethod();
+            BusinessDetailsViewModel business = null;
+            string selectStatement = " SELECT * " +
+                                     " FROM Business " +
+                                     " INNER JOIN Category " +
+                                     " ON Business.CategoryId = Category.CategoryId " +
+                                     " INNER JOIN Address " +
+                                     " ON Business.AddressId = Address.AddressId " +
+                                     " WHERE Business.BusinessId = @BusinessId ";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@BusinessId", businessId);
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        business = new BusinessDetailsViewModel()
+                        {
+                            BusinessId = (int)reader["BusinessId"],
+                            TitleEnglish = reader["TitleEnglish"].ToString(),
+                            TitlePersian = reader["TitlePersian"].ToString(),
+                            DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
+                            DescriptionPersian = reader["DescriptionPersian"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            City = reader["City"].ToString(),
+                            State = reader["State"].ToString(),
+                            Verified = (bool)reader["Verified"],
+                            Phone1 = reader["Phone1"].ToString(),
+                            Phone2 = reader["Phone2"].ToString(),
+                            Website = reader["Website"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            ZipCode = reader["ZipCode"].ToString(),
+                            AddressLine1 = reader["AddressLine1"].ToString(),
+                            AddressLine2 = reader["AddressLine2"].ToString(),
+                            GoogleMapLink = reader["GoogleMapLink"].ToString()
+                        
+
+
+                        };
+                    }
+                    connection.Close();
+                }
+            }
+
+            return business;
         }
 
 
@@ -96,7 +149,7 @@ namespace PersianYellowPages.DataLayer
                     {
                         businesses.Add(new BusinessDetailsViewModel
                         {
-
+                            BusinessId = (int)reader["BusinessId"],
                             TitleEnglish = reader["TitleEnglish"].ToString(),
                             TitlePersian = reader["TitlePersian"].ToString(),
                             DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
@@ -142,7 +195,7 @@ namespace PersianYellowPages.DataLayer
                     {
                         businesses.Add(new BusinessDetailsViewModel
                         {
-
+                            BusinessId = (int)reader["BusinessId"],
                             TitleEnglish = reader["TitleEnglish"].ToString(),
                             TitlePersian = reader["TitlePersian"].ToString(),
                             DescriptionEnglish = reader["DescriptionEnglish"].ToString(),

@@ -30,75 +30,62 @@ namespace PersianYellowPages.Controllers
             return View(businessList);
         }
 
-        // GET: BusinessOwnerController/Details/5
-        public ActionResult Details(int id)
+        
+
+        // GET: BusinessOwnerController/Add
+        [HttpGet]
+        public ActionResult Add()
         {
-            return View();
+            ViewBag.Action = "Add";
+            return View(new Business());
         }
 
-        // GET: BusinessOwnerController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BusinessOwnerController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Add(Business business)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            
+            BusinessDB.AddBusiness(business);
+            return RedirectToAction("Index", "BusinessOwner");
         }
 
 
 
-        // GET: BusinessOwnerController/Edit/5
+
+        //GET: BusinessOwnerController/Edit
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewBag.Action = "Edit";
+            BusinessDetailsViewModel business = BusinessDB.GetBusiness(id);
+            return View(business);
         }
 
         // POST: BusinessOwnerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(BusinessDetailsViewModel business)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            BusinessDB.UpdateBusiness(business);
+            return RedirectToAction("Index", "BusinessOwner");
+
         }
 
-        // GET: BusinessOwnerController/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            ViewBag.Action = "Delete";
+            Business business = BusinessDB.FindBusiness(id);
+            return View(business);
         }
 
         // POST: BusinessOwnerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Business business)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            int id = business.BusinessId;
+            BusinessDB.DeleteBusiness(id);
+            return RedirectToAction("Index", "BusinessOwner");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PersianYellowPages.Models
 {
     public class Business
     {
-        public int BusinessID { get; set; }
+        public int BusinessId { get; set; }
 
         [Required(ErrorMessage = "Please enter an English title.")]
         public string TitleEnglish { get; set; }
@@ -33,16 +33,25 @@ namespace PersianYellowPages.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter available sqft")]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "Please enter available sqft")]
-        public int AddressID { get; set; }
+        public int AddressId { get; set; }
 
-        //public  Address Address { get; set; }
+        [Required(ErrorMessage = "Please enter available sqft")]
+        public int UserId { get; set; }
+
+        public bool Verified { get; set; }
+
+    
         public  Category Categories { get; set; }
-        //public  UserProfile User { get; set; }
 
 
-      
+        public UserProfile UserProfiles { get; set; }
+
+        public Address Addresses { get; set; }
+
+
+
     }
 }

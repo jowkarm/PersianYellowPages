@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Go to the Admin dashboard." xml:space="preserve">
-    <value>ورود به پنل مدیریت</value>
+  <data name="Admin dashboard" xml:space="preserve">
+    <value>پنل مدیریت</value>
   </data>
   <data name="Hello!" xml:space="preserve">
     <value>!سلام</value>
@@ -132,13 +132,16 @@
   <data name="Privacy" xml:space="preserve">
     <value>حریم خصوصی</value>
   </data>
-  <data name="Register your business now!" xml:space="preserve">
-    <value>!کسب‌وکار خود را ثبت کنید</value>
+  <data name="Register your business here!" xml:space="preserve">
+    <value>!کسب‌وکار خود را از اینجا ثبت کنید</value>
   </data>
   <data name="Signin" xml:space="preserve">
     <value>ورود</value>
   </data>
   <data name="Signout" xml:space="preserve">
     <value>خروج</value>
+  </data>
+  <data name="Your Business" xml:space="preserve">
+    <value>!ثبت بیزنس</value>
   </data>
 </root>

@@ -26,9 +26,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
                         </li>
+                      
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@language.Getkey("Privacy")</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="BusinessOwner" asp-action="Index">@language.Getkey("Your Business")</a>
                         </li>
+
+                        @if (User.Identity.Name == "jokar.mehdi2@gmail.com")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">@language.Getkey("Admin dashboard")</a>
+                        </li>
+                        }
 
                     </ul>
                 </div>
@@ -72,14 +80,9 @@
         </nav>
     </header>
     <div class="container">
-        @if (User.Identity.Name == "jokar.mehdi2@gmail.com")
-        {<div class="alert alert-warning" role="alert">
-                <a class="link-warning" asp-area="" asp-controller="Admin" asp-action="Index">@language.Getkey("Go to the Admin dashboard.")</a>
-            </div>}
+        
 
-        <div class="alert alert-primary" role="alert">
-            <a class="link-primary" asp-area="" asp-controller="BusinessOwner" asp-action="Index" >@language.Getkey("Register your business now!")</a>
-        </div>
+        
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

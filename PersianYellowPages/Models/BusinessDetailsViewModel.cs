@@ -8,7 +8,12 @@ namespace PersianYellowPages.Models
     public class BusinessDetailsViewModel
     {
         public int BusinessId { get; set; }
+        public int CategoryId { get; set; }
+        public int AddressId { get; set; }
+        public int UserId { get; set; }
         public string TitleEnglish { get; set; }
+        public string UserEmail { get; set; }
+        public string UserDisplayName { get; set; }
         public string TitlePersian { get; set; }
         public string DescriptionEnglish { get; set; }
         public string DescriptionPersian { get; set; }

@@ -1,5 +1,6 @@
-﻿<!--
-     (Teamwork)new
+﻿<!-- Mohammad Jokar Konavi, Behrooz Kazemi, Tonya Martinez ,and Andrea Griffis
+     06/17/2022
+     Capstone
 -->
 
 @using Microsoft.AspNetCore.Http
@@ -10,7 +11,7 @@
 @{ ViewData["Title"] = "Search Results"; }
 
 <!--Search Box-->
-<div class="card w-75 p-3 m-3">
+<div class="card w-75 p-3 m-3 zard">
     <form class="form-inline w-75 p-3 m-3" asp-action="Search">
 
         <div class="form-group">
@@ -29,7 +30,7 @@
 
 @foreach (var business in Model)
 {
-<div class="card w-75 p-3 m-3">
+<div class="card w-75 p-3 m-3 zard">
     <div class="card-body">
         <h5 class="card-title">@business.TitleEnglish</h5>
         <p class="card-text">@business.DescriptionEnglish</p>

@@ -1,4 +1,10 @@
-﻿@inject LanguageService language
+﻿<!-- Mohammad Jokar Konavi, Behrooz Kazemi, Tonya Martinez ,and Andrea Griffis
+     06/17/2022
+     Capstone
+-->
+
+
+@inject LanguageService language
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @language.Getkey("Persian YellowPages")</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
     @if (System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
     {
-<link rel="stylesheet" href="~/css/rtl.css" />}
+<link rel="stylesheet" href="~/css/rtl.css" />
+}
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-warning  border-bottom box-shadow mb-3">
             <div class="container">
 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("Persian YellowPages")</a>
@@ -26,17 +33,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
                         </li>
-                      
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BusinessOwner" asp-action="Index">@language.Getkey("Your Business")</a>
                         </li>
 
                         @if (User.Identity.Name == "jokar.mehdi2@gmail.com")
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">@language.Getkey("Admin dashboard")</a>
-                        </li>
-                        }
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">@language.Getkey("Admin dashboard")</a>
+            </li>
+}
 
                     </ul>
                 </div>
@@ -48,27 +55,26 @@
                             <ul class="navbar-nav flex-grow-1">
                                 @{ if (User.Identity.IsAuthenticated == false)
                                     {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Signin" asp-area="MicrosoftIdentity">@language.Getkey("Signin")</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signin" asp-area="MicrosoftIdentity">@language.Getkey("Signin")</a>
 
-                            </li>
-
+                        </li>
  }
-                                        else
-                                        {
+                    else
+                    {
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity">@language.Getkey("Signout")</a>
-                            </li> } }
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity">@language.Getkey("Signout")</a>
+        </li> } }
                                 @if (User.Identity.IsAuthenticated == true)
-                                    {
-                            <li class="nav-item"> <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity"><strong>@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value</strong> @language.Getkey("Hello!")</a></li>
-                            }
-                                            <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> English</a></li>
+                                {
+                    <li class="nav-item"> <a class="nav-link text-dark" asp-controller="Account" asp-action="Signout" asp-area="MicrosoftIdentity"><strong>@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value</strong> @language.Getkey("Hello!")</a></li>
+}
+                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark"><i class="flag-icon flag-icon-gb"></i> English</a></li>
 
-                                                            <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="fa" class="nav-link text-dark"><i class="flag-icon flag-icon-de"></i> فارسی</a></li>
+                                <li class="nav-item"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="fa" class="nav-link text-dark"><i class="flag-icon flag-icon-de"></i> فارسی</a></li>
 
-                               </ul>
+                            </ul>
 
 
 
@@ -80,18 +86,20 @@
         </nav>
     </header>
     <div class="container">
-        
 
-        
+
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - @language.Getkey("Persian YellowPages") - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-warning  border-bottom box-shadow mb-3">
+            <div class="container">
+                &copy; 2022 - @language.Getkey("Persian YellowPages") - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </nav>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

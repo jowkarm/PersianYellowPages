@@ -1,4 +1,9 @@
-﻿@model List<BusinessDetailsViewModel>
+﻿<!-- Mohammad Jokar Konavi, Behrooz Kazemi, Tonya Martinez ,and Andrea Griffis
+     06/17/2022
+     Capstone
+-->
+
+@model List<BusinessDetailsViewModel>
 @{ ViewBag.Title = "Persian Yellow Pages"; }
 
 
@@ -10,7 +15,7 @@
 
 @foreach (var business in Model)
 {
-<div class="card w-75 p-3 m-3">
+<div class="card w-75 p-3 m-3 zard">
     <div class="card-body">
         @{ @if (business.Verified == true)
             {<p class="alert alert-success">Verified</p>}
@@ -40,6 +45,6 @@
            asp-route-id="@business.BusinessId" class="btn btn-primary">Edit</a>
         <a asp-controller="BusinessOwner" asp-action="Delete"
            asp-route-id="@business.BusinessId" class="btn btn-danger">Delete</a>
-       
+
     </div>
 </div>      }

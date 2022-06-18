@@ -1,6 +1,5 @@
-﻿<!--
-     Team1
-     June 16,2022
+﻿<!-- Mohammad Jokar Konavi, Behrooz Kazemi, Tonya Martinez ,and Andrea Griffis
+     06/17/2022
      Capstone
 -->
 
@@ -12,7 +11,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form asp-action="Add" method="post">
+<form class="zard" asp-action="Add" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
@@ -56,8 +55,8 @@
         <input asp-for="Categories.CategoryName" class="form-control">
     </div>
 
-   
-        <input type="hidden" asp-for="BusinessId" />
+
+    <input type="hidden" asp-for="BusinessId" />
 
 
 
@@ -66,47 +65,47 @@
 
 
 
-        <input type="hidden" asp-for="UserProfiles.UserEmail" value="@User.Identity.Name"  />
-        <input type="hidden" asp-for="UserProfiles.UserDisplayName" value="@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value"  />
+    <input type="hidden" asp-for="UserProfiles.UserEmail" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="UserProfiles.UserDisplayName" value="@User.Claims.FirstOrDefault(x => x.Type.Equals("name")).Value" />
 
 
 
 
 
-        <div class="form-group">
-            <label asp-for="Addresses.AddressLine1">Address Line 1</label>
-            <input asp-for="Addresses.AddressLine1" class="form-control">
-        </div>
+    <div class="form-group">
+        <label asp-for="Addresses.AddressLine1">Address Line 1</label>
+        <input asp-for="Addresses.AddressLine1" class="form-control">
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Addresses.AddressLine2">Address Line 2</label>
-            <input asp-for="Addresses.AddressLine2" class="form-control">
-        </div>
+    <div class="form-group">
+        <label asp-for="Addresses.AddressLine2">Address Line 2</label>
+        <input asp-for="Addresses.AddressLine2" class="form-control">
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Addresses.City">City</label>
-            <input asp-for="Addresses.City" class="form-control">
-        </div>
+    <div class="form-group">
+        <label asp-for="Addresses.City">City</label>
+        <input asp-for="Addresses.City" class="form-control">
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Addresses.State">State</label>
-            <input asp-for="Addresses.State" class="form-control">
-        </div>
+    <div class="form-group">
+        <label asp-for="Addresses.State">State</label>
+        <input asp-for="Addresses.State" class="form-control">
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Addresses.ZipCode">Zip Code</label>
-            <input asp-for="Addresses.ZipCode" class="form-control">
-        </div>
+    <div class="form-group">
+        <label asp-for="Addresses.ZipCode">Zip Code</label>
+        <input asp-for="Addresses.ZipCode" class="form-control">
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Addresses.GoogleMapLink">Google Map Link</label>
-            <input asp-for="Addresses.GoogleMapLink" class="form-control">
-        </div>
-
-
+    <div class="form-group">
+        <label asp-for="Addresses.GoogleMapLink">Google Map Link</label>
+        <input asp-for="Addresses.GoogleMapLink" class="form-control">
+    </div>
 
 
-    <button type="submit" class="btn btn-primary" >@ViewBag.Action</button>
+
+
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
     <a asp-controller="BusinessOwner" asp-action="Index"
        class="btn btn-primary">Cancel</a>
 </form>

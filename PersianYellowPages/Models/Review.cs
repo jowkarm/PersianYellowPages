@@ -16,14 +16,14 @@ namespace PersianYellowPages.Models
     {
         public int ReviewId { get; set; }
         public int Rate { get; set; }
-
         [Column(TypeName = "NVARCHAR")]
         [StringLength(500)]
         public string Comment { get; set; }
-
         public DateTime DateTime { get; set; }
         public int BusinessId { get; set; }
         public int UserId { get; set; }
+
+        public UserProfile UserProfiles { get; set; }
 
 
     }

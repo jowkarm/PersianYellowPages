@@ -404,5 +404,82 @@ namespace PersianYellowPages.DataLayer
             command.ExecuteNonQuery();
             connection.Close();
         }
+
+
+        //The StateList() method is created
+        public static List<string> StateList()
+        {
+            string ConnectionString = StaticMethod();
+            List<string> states = new List<string>();
+            string selectStatement = " SELECT DISTINCT State " +
+                                     " FROM Address ;" ;
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        states.Add(reader["State"].ToString());
+                    }
+                    connection.Close();
+                }
+            }
+
+            return states;
+        }
+
+
+
+        //The BusinessList() method is created
+        public static List<BusinessDetailsViewModel> SearchBusiness(string Phrase)
+        {
+            string ConnectionString = StaticMethod();
+            List<BusinessDetailsViewModel> businesses = new List<BusinessDetailsViewModel>();
+            string searchStatement = " SELECT * " +
+                                     " FROM Business " +
+                                     " INNER JOIN Category " +
+                                     " ON Business.CategoryId = Category.CategoryId " +
+                                     " INNER JOIN Address " +
+                                     " ON Business.AddressId = Address.AddressId " +
+                                     " WHERE Business.TitleEnglish LIKE @Phrase " +
+                                     " OR Business.TitlePersian LIKE @Phrase " +
+                                     " OR Business.DescriptionEnglish LIKE @Phrase " +
+                                     " OR Business.DescriptionPersian LIKE @Phrase " +
+                                     " OR Category.CategoryName LIKE @Phrase " +
+                                     " AND Business.Verified = 'True' " ;
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(searchStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@Phrase", Phrase);
+                    
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                                    businesses.Add(new BusinessDetailsViewModel
+                                    {
+                                        BusinessId = (int)reader["BusinessId"],
+                                        TitleEnglish = reader["TitleEnglish"].ToString(),
+                                        TitlePersian = reader["TitlePersian"].ToString(),
+                                        DescriptionEnglish = reader["DescriptionEnglish"].ToString(),
+                                        DescriptionPersian = reader["DescriptionPersian"].ToString(),
+                                        CategoryName = reader["CategoryName"].ToString(),
+                                        City = reader["City"].ToString(),
+                                        State = reader["State"].ToString(),
+                                        Verified = (bool)reader["Verified"]
+
+
+                                    });
+                                }
+                                connection.Close();
+
+                }
+            }
+
+            return businesses;
+        }
     }
 }

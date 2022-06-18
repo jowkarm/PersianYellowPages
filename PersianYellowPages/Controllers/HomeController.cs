@@ -24,8 +24,38 @@ namespace PersianYellowPages.Controllers
 
         public IActionResult Index()
         {
-            List<BusinessDetailsViewModel> businessList = BusinessDB.BusinessList();
+            
+            ViewBag.States = BusinessDB.StateList();
+            List <BusinessDetailsViewModel> businessList = BusinessDB.BusinessList();
             return View(businessList);
+        }
+
+
+        // GET: Products/ShowSearchForm
+        [HttpGet]
+        public IActionResult Search()
+        {
+            // create the view model
+            List<BusinessDetailsViewModel> model = new List<BusinessDetailsViewModel>();
+
+            // pass the view model to the view
+            return View(model);
+        }
+
+        // POST: Products/ShowSearchResults
+        [HttpPost]
+        public IActionResult Search(string SearchPhrase)
+        {
+            // create the view model
+            String withDoubleQuotes = "%" + SearchPhrase + "%";
+            String stringWithSingleQuotes = withDoubleQuotes.Replace('"', '\'');
+
+            List<BusinessDetailsViewModel> model = BusinessDB.SearchBusiness(stringWithSingleQuotes);
+
+            
+
+            // pass the view model to the view
+            return View("Search", model);
         }
 
 

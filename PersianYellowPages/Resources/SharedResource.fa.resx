@@ -120,6 +120,12 @@
   <data name="Admin dashboard" xml:space="preserve">
     <value>پنل مدیریت</value>
   </data>
+  <data name="Business List" xml:space="preserve">
+    <value>لیست بیزنس‌ها</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>بیشتر</value>
+  </data>
   <data name="Hello!" xml:space="preserve">
     <value>!سلام</value>
   </data>
@@ -134,6 +140,12 @@
   </data>
   <data name="Register your business here!" xml:space="preserve">
     <value>!کسب‌وکار خود را از اینجا ثبت کنید</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="Search Results" xml:space="preserve">
+    <value>نتایج جستجو</value>
   </data>
   <data name="Signin" xml:space="preserve">
     <value>ورود</value>

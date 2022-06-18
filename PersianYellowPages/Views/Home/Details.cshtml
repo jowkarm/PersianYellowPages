@@ -1,9 +1,27 @@
 ﻿@model BusinessDetailsViewModel
+@inject LanguageService language
 
 @{
 
     ViewData["Title"] = "View";
 }
+
+<!--Search Box-->
+<div class="card w-75 p-3 m-3">
+    <form class="form-inline w-75 p-3 m-3" asp-action="Search">
+
+        <div class="form-group">
+            <label for="SearchPhrase" class="control-label"></label>
+            <input name="SearchPhrase" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="@language.Getkey("Search")" class="btn btn-primary" />
+        </div>
+
+    </form>
+</div>
+
 
 <!--This page is done.-->
 <div class="card w-100 p-3 m-3">
@@ -43,7 +61,7 @@
         </a>
     </div>
     <br />
-    
+
 
     <div class="embed-responsive embed-responsive-21by9">
         <iframe class="embed-responsive-item" src="@Model.GoogleMapLink"></iframe>

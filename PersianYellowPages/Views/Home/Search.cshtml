@@ -2,10 +2,12 @@
      (Teamwork)new
 -->
 
-@model List<BusinessDetailsViewModel>
 @using Microsoft.AspNetCore.Http
+@model List<BusinessDetailsViewModel>
 @inject LanguageService language
-@{ ViewBag.Title = "Persian Yellow Pages"; }
+
+
+@{ ViewData["Title"] = "Search Results"; }
 
 <!--Search Box-->
 <div class="card w-75 p-3 m-3">
@@ -23,9 +25,7 @@
     </form>
 </div>
 
-
-
-<h2 class="w-75 p-3 m-3">@language.Getkey("Business List")</h2>
+<h2 class="w-75 p-3 m-3">@language.Getkey("Search Results")</h2>
 
 @foreach (var business in Model)
 {

@@ -481,5 +481,81 @@ namespace PersianYellowPages.DataLayer
 
             return businesses;
         }
+
+
+        //The BusinessList() method is created
+        public static List<Review> ReviewList(int BusinessId)
+        {
+            string ConnectionString = StaticMethod();
+            List<Review> reviews = new List<Review>();
+            string selectStatement = " SELECT * " +
+                                     " FROM Review " +
+                                     " WHERE Review.BusinessId = @BusinessId ";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@BusinessId", BusinessId);
+                    connection.Open();
+                    using SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        reviews.Add(new Review
+                        {
+                            ReviewId = (int)reader["ReviewId"],
+                            Rate = (int)reader["Rate"],
+                            BusinessId = (int)reader["BusinessId"],
+                            UserId = (int)reader["UserId"],
+                            Comment = reader["Comment"].ToString(),
+                            DateTime = (DateTime)reader["DateTime"]
+
+
+                        });
+                    }
+                    connection.Close();
+                }
+            }
+
+            return reviews;
+        }
+
+
+
+        //AddBusiness method
+        public static void AddReview(Review review)
+        {
+            string ConnectionString = StaticMethod();
+
+
+            string insertStatement = 
+                                     " DECLARE 	@UserId [int]; " +
+                                      " IF (SELECT [UserId] FROM [dbo].[UserProfile] WHERE [UserEmail] = @UserEmail) IS NULL " +
+                                            " BEGIN " +
+                                                " INSERT INTO UserProfile (UserEmail, UserDisplayName) " +
+                                                " VALUES (@UserEmail, @UserDisplayName ); " +
+                                                " SELECT @UserId = SCOPE_IDENTITY(); " +
+                                            " END " +
+                                      " ELSE " +
+                                            " SET @UserId = (SELECT[UserId] FROM [dbo].[UserProfile] WHERE[UserEmail] = @UserEmail); " +
+                                      " INSERT INTO Review (ReviewId, Rate, Comment, " +
+                                      " DateTime, BusinessId, UserId ) " +
+                                      " VALUES ( @ReviewId, @Rate, @Comment, " +
+                                      " GETDATE(), @BusinessId, @UserId) ";
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            using SqlCommand command = new SqlCommand(insertStatement, connection);
+            command.Parameters.AddWithValue("@ReviewId", review.ReviewId);
+            command.Parameters.AddWithValue("@BusinessId", review.BusinessId);
+            command.Parameters.AddWithValue("@UserId", review.UserId);
+            command.Parameters.AddWithValue("@Rate", review.Rate);
+            command.Parameters.AddWithValue("@Comment", review.Comment);
+            command.Parameters.AddWithValue("@DateTime", review.DateTime);
+            command.Parameters.AddWithValue("@UserEmail", review.UserProfiles.UserEmail);
+            command.Parameters.AddWithValue("@UserDisplayName", review.UserProfiles.UserDisplayName);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+    }
+
     }
 }

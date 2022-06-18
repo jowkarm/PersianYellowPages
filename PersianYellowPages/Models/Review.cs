@@ -14,6 +14,8 @@ namespace PersianYellowPages.Models
         public int BusinessId { get; set; }
         public int UserId { get; set; }
 
-        
+        public UserProfile UserProfiles { get; set; }
+
+
     }
 }

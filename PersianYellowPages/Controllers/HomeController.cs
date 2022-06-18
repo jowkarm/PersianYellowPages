@@ -61,9 +61,29 @@ namespace PersianYellowPages.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.Reviews = BusinessDB.ReviewList(id);
             BusinessDetailsViewModel businessDetails = BusinessDB.GetBusiness(id);
             return View(businessDetails);
         }
+
+        // GET: Home/Add
+        [HttpGet]
+        public ActionResult Review(int businessId)
+        {
+            ViewBag.Action = "Review";
+            Review review = new Review();
+            review.BusinessId = businessId;
+            return View(review);
+        }
+
+        [HttpPost]
+        public ActionResult Review(Review review)
+        {
+
+            BusinessDB.AddReview(review);
+            return RedirectToAction("Details", "Home", new { id = review.BusinessId });
+        }
+
 
 
         public IActionResult ChangeLanguage(string culture)
